@@ -14,40 +14,39 @@ export default function FlowchartViewer({ svgContent, isLoading }) {
   const handleResetZoom = () => setZoom(1);
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <span style={styles.title}>
-          <Eye size={15} color="#38bdf8" /> Interactive Flowchart Diagram
+    <div className="relative flex h-full min-h-0 flex-col overflow-hidden bg-[#f1f2e9]">
+      <div className="flex h-12 shrink-0 items-center justify-around gap-4 border-b border-[#d8dbce] bg-[#f8f8f1] px-4">
+       
+        <span className="flex min-w-0 items-center gap-2.5 truncate text-xs font-semibold text-[#343a31]">
+           Flowchart
         </span>
-        <div style={styles.zoomControls}>
-          <button style={styles.iconBtn} onClick={handleZoomOut} title="Zoom Out"><ZoomOut size={14} /></button>
-          <span style={styles.zoomText}>{Math.round(zoom * 100)}%</span>
-          <button style={styles.iconBtn} onClick={handleZoomIn} title="Zoom In"><ZoomIn size={14} /></button>
-          <button style={styles.iconBtn} onClick={handleResetZoom} title="Reset View"><RotateCcw size={14} /></button>
+       
+        <div className="flex shrink-0 items-center gap-1">
+          <button className="flex size-8 items-center justify-center rounded-md text-[#5e6758] transition-colors hover:bg-[#e6e9dc] hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleZoomOut} title="Zoom Out" aria-label="Zoom out"><ZoomOut size={15} /></button>
+          <span className="min-w-10 text-center font-mono text-[11px] text-[#666e60]">{Math.round(zoom * 100)}%</span>
+          <button className="flex size-8 items-center justify-center rounded-md text-[#5e6758] transition-colors hover:bg-[#e6e9dc] hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleZoomIn} title="Zoom In" aria-label="Zoom in"><ZoomIn size={15} /></button>
+          <button className="ml-1 flex size-8 items-center justify-center rounded-md border-l border-[#d8dbce] pl-2 text-[#5e6758] transition-colors hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleResetZoom} title="Reset View" aria-label="Reset view"><RotateCcw size={14} /></button>
         </div>
       </div>
 
-      <div style={styles.viewport} ref={containerRef}>
+      <div className="diagram-grid relative flex min-h-0 flex-1 items-start justify-center overflow-auto p-6 sm:p-8" ref={containerRef}>
         {isLoading && (
-          <div style={styles.statusOverlay}>
-            <div style={styles.spinner}></div>
-            <p>Analyzing control flow AST...</p>
+          <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 text-center text-sm text-[#68705f]">
+            <div className="size-7 animate-spin rounded-full border-[3px] border-[#d7dccb] border-t-[#788d42]" />
+            <p>Analyzing control flow...</p>
           </div>
         )}
 
         {!isLoading && !svgContent && (
-          <div style={styles.statusOverlay}>
-            <p style={{ color: '#64748b' }}>Enter valid JavaScript code to generate a flowchart.</p>
+          <div className="absolute left-1/2 top-1/2 max-w-64 -translate-x-1/2 -translate-y-1/2 text-center text-sm leading-6 text-[#747b6e]">
+            <p>Enter valid JavaScript code to generate a flowchart.</p>
           </div>
         )}
 
         {!isLoading && svgContent && (
           <div 
-            style={{
-              ...styles.svgContainer,
-              transform: `scale(${zoom})`,
-              transformOrigin: 'top center'
-            }}
+            className="max-w-full origin-top transition-transform duration-150 ease-out [&>svg]:h-auto [&>svg]:max-w-full"
+            style={{ transform: `scale(${zoom})` }}
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
         )}
@@ -55,85 +54,3 @@ export default function FlowchartViewer({ svgContent, isLoading }) {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    backgroundColor: '#0b0f19',
-    position: 'relative',
-    overflow: 'hidden'
-  },
-  header: {
-    padding: '10px 16px',
-    backgroundColor: '#1e293b',
-    borderBottom: '1px solid #334155',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: '0.85rem',
-    fontWeight: '600',
-    color: '#cbd5e1',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px'
-  },
-  zoomControls: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px'
-  },
-  zoomText: {
-    fontSize: '0.75rem',
-    color: '#94a3b8',
-    minWidth: '42px',
-    textAlign: 'center'
-  },
-  iconBtn: {
-    background: '#0f172a',
-    border: '1px solid #334155',
-    color: '#cbd5e1',
-    padding: '4px 8px',
-    borderRadius: '4px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  viewport: {
-    flex: 1,
-    overflow: 'auto',
-    position: 'relative',
-    padding: '24px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-start'
-  },
-  svgContainer: {
-    transition: 'transform 0.15s ease-out',
-    maxWidth: '100%'
-  },
-  statusOverlay: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    textAlign: 'center',
-    color: '#94a3b8',
-    fontSize: '0.9rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '12px'
-  },
-  spinner: {
-    width: '28px',
-    height: '28px',
-    border: '3px solid #334155',
-    borderTop: '3px solid #38bdf8',
-    borderRadius: '50%',
-    animation: 'spin 0.8s linear infinite'
-  }
-};

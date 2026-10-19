@@ -3,98 +3,31 @@ import { Trash2, Download, Code2 } from 'lucide-react';
 
 export default function Toolbar({ onClear, onExport, hasSvg }) {
   return (
-    <header style={styles.toolbar}>
-      <div style={styles.titleSection}>
-        <div style={styles.logoBadge}>
-          <Code2 size={22} color="#38bdf8" />
+    <header className="flex flex-wrap items-center justify-between gap-6 border-b border-[#2c342d] bg-[#171c18] px-5 py-3.5 sm:px-7">
+      <div className="flex min-w-0 items-center gap-3.5 ">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-[#3b493b] bg-[#202920] text-[#d1f36a] ">
+          <Code2 size={20} />
         </div>
-        <div>
-          <h1 style={styles.title}>JS Flow Visualizer</h1>
-          <p style={styles.subtitle}>Convert JavaScript control flow into clear, interactive SVGs</p>
+        <div className="min-w-0">
+          <h1 className="truncate text-[15px] font-semibold tracking-[0.01em] text-[#f0f2e9]">JS Flow Visualizer</h1>
+          <p className="mt-0.5 hidden text-xs text-[#8e998d] sm:block">Turn JavaScript logic into a clear visual map</p>
         </div>
       </div>
 
-      <div style={styles.controlsSection}>
-        <button style={styles.actionBtnSecondary} onClick={onClear} title="Clear Editor">
-          <Trash2 size={16} /> Clear
+      <div className="ml-auto flex items-center gap-2">
+        <button className="inline-flex h-9 items-center gap-2 rounded-md border border-[#394139] px-3 text-xs font-medium text-[#c2c9bc] transition-colors hover:border-[#596653] hover:bg-[#222a23] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d1f36a]" onClick={onClear} title="Clear Editor">
+          <Trash2 size={15} /> <span>Clear</span>
         </button>
 
         <button 
-          style={{ ...styles.actionBtnPrimary, opacity: hasSvg ? 1 : 0.5, cursor: hasSvg ? 'pointer' : 'not-allowed' }} 
+          className="inline-flex h-9 items-center gap-2 rounded-md bg-[#d1f36a] px-3.5 text-xs font-semibold text-[#1b2414] transition-colors hover:bg-[#defb80] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d1f36a] disabled:cursor-not-allowed disabled:opacity-40" 
           onClick={onExport} 
           disabled={!hasSvg}
           title="Export SVG Diagram"
         >
-          <Download size={16} /> Export SVG
+          <Download size={15} /> <span>Export SVG</span>
         </button>
       </div>
     </header>
   );
 }
-
-const styles = {
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '12px 20px',
-    backgroundColor: '#1e293b',
-    borderBottom: '1px solid #334155',
-    flexWrap: 'wrap',
-    gap: '12px'
-  },
-  titleSection: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px'
-  },
-  logoBadge: {
-    width: '38px',
-    height: '38px',
-    borderRadius: '8px',
-    backgroundColor: '#0f172a',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '1px solid #334155'
-  },
-  title: {
-    fontSize: '1.1rem',
-    fontWeight: '700',
-    color: '#f8fafc',
-    letterSpacing: '-0.02em'
-  },
-  subtitle: {
-    fontSize: '0.75rem',
-    color: '#94a3b8'
-  },
-  controlsSection: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px'
-  },
-  actionBtnSecondary: {
-    background: '#334155',
-    border: 'none',
-    color: '#f8fafc',
-    padding: '7px 14px',
-    borderRadius: '6px',
-    fontSize: '0.8rem',
-    fontWeight: '600',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px'
-  },
-  actionBtnPrimary: {
-    background: 'linear-gradient(135deg, #0284c7 0%, #2563eb 100%)',
-    border: 'none',
-    color: '#ffffff',
-    padding: '7px 14px',
-    borderRadius: '6px',
-    fontSize: '0.8rem',
-    fontWeight: '600',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px'
-  }
-};

@@ -53,41 +53,21 @@ export default function App() {
   };
 
   return (
-    <div style={styles.appContainer}>
+    <div className="flex h-dvh min-h-[420px] w-full flex-col overflow-hidden bg-[#111512] text-[#edf1e8]">
       <Toolbar 
         onClear={handleClear}
         onExport={handleExport}
         hasSvg={!!svgContent}
       />
 
-      <main style={styles.mainGrid}>
-        <div style={styles.panel}>
+      <main className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(260px,0.9fr)_minmax(280px,1.1fr)] overflow-hidden lg:grid-cols-[minmax(340px,0.85fr)_minmax(0,1.5fr)] lg:grid-rows-1">
+        <section className="min-h-0 overflow-hidden border-b border-[#2c342d] lg:border-b-0 lg:border-r">
           <CodeEditor code={code} onChange={setCode} error={error} />
-        </div>
-        <div style={styles.panel}>
+        </section>
+        <section className="min-h-0 overflow-hidden">
           <FlowchartViewer svgContent={svgContent} isLoading={isLoading} />
-        </div>
+        </section>
       </main>
     </div>
   );
 }
-
-const styles = {
-  appContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100vh',
-    width: '100vw',
-    backgroundColor: '#0f172a'
-  },
-  mainGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    flex: 1,
-    overflow: 'hidden'
-  },
-  panel: {
-    height: '100%',
-    overflow: 'hidden'
-  }
-};

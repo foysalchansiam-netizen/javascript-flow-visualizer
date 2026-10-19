@@ -1,13 +1,16 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: #0f172a;
-  color: #f8fafc;
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  background-color: #111512;
+  color: #edf1e8;
   overflow: hidden;
 }
 
@@ -16,22 +19,22 @@ button {
   cursor: pointer;
 }
 
+.diagram-grid {
+  background-image: linear-gradient(#d9ddcf 1px, transparent 1px), linear-gradient(90deg, #d9ddcf 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #171c18;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #495248;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  background: #64705f;
 }
