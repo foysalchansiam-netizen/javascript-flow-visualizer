@@ -4,14 +4,23 @@ html,
 body,
 #root {
   width: 100%;
+}
+
+html {
   height: 100%;
+}
+
+body,
+#root {
+  min-height: 100%;
 }
 
 body {
   font-family: "Aptos", "Segoe UI", sans-serif;
   background-color: #111512;
   color: #edf1e8;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 button {

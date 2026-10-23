@@ -3,15 +3,52 @@ import { ZoomIn, ZoomOut, RotateCcw, Eye } from 'lucide-react';
 
 export default function FlowchartViewer({ svgContent, isLoading }) {
   const [zoom, setZoom] = useState(1);
-  const containerRef = useRef(null);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef(null);
 
   useEffect(() => {
     setZoom(1);
+    setPan({ x: 0, y: 0 });
   }, [svgContent]);
 
   const handleZoomIn = () => setZoom(z => Math.min(z + 0.2, 3.0));
   const handleZoomOut = () => setZoom(z => Math.max(z - 0.2, 0.4));
-  const handleResetZoom = () => setZoom(1);
+  const handleResetZoom = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const handlePointerDown = event => {
+    if (!svgContent || event.button !== 0) return;
+
+    event.preventDefault();
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startPan: pan,
+    };
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = event => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+
+    setPan({
+      x: drag.startPan.x + event.clientX - drag.startX,
+      y: drag.startPan.y + event.clientY - drag.startY,
+    });
+  };
+
+  const handlePointerUp = event => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+
+    dragRef.current = null;
+    setIsDragging(false);
+  };
 
   return (
     <div className="relative flex h-full min-h-0 flex-col overflow-hidden bg-[#f1f2e9]">
@@ -29,7 +66,16 @@ export default function FlowchartViewer({ svgContent, isLoading }) {
         </div>
       </div>
 
-      <div className="diagram-grid relative flex min-h-0 flex-1 items-start justify-center overflow-auto p-6 sm:p-8" ref={containerRef}>
+      <div
+        className={`diagram-grid relative flex min-h-0 flex-1 items-start justify-center overflow-hidden p-6 sm:p-8 ${
+          svgContent ? (isDragging ? 'cursor-grabbing' : 'cursor-grab') : ''
+        }`}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        style={{ touchAction: 'none' }}
+      >
         {isLoading && (
           <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 text-center text-sm text-[#68705f]">
             <div className="size-7 animate-spin rounded-full border-[3px] border-[#d7dccb] border-t-[#788d42]" />
@@ -45,8 +91,11 @@ export default function FlowchartViewer({ svgContent, isLoading }) {
 
         {!isLoading && svgContent && (
           <div 
-            className="max-w-full origin-top transition-transform duration-150 ease-out [&>svg]:h-auto [&>svg]:max-w-full"
-            style={{ transform: `scale(${zoom})` }}
+            className="max-w-full origin-top [&>svg]:h-auto [&>svg]:max-w-full"
+            style={{
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              transition: isDragging ? 'none' : 'transform 150ms ease-out',
+            }}
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
         )}
