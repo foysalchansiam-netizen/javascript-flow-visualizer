@@ -56,10 +56,10 @@ export default function FlowchartViewer({ svgContent, isLoading, onClear, onExpo
     <div className="relative flex h-full min-h-0 flex-col overflow-hidden bg-[#f1f2e9]">
       <div className="flex h-12 shrink-0 items-center justify-between gap-3 border-b border-[#d8dbce] bg-[#f8f8f1] px-4">
         <div className="flex shrink-0 items-center gap-1">
-          <button className="flex size-8 items-center justify-center rounded-md text-[#5e6758] transition-colors hover:bg-[#e6e9dc] hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleZoomOut} title="Zoom Out" aria-label="Zoom out"><ZoomOut size={15} /></button>
+          <button className="flex size-9 items-center justify-center rounded-lg text-[#5e6758] transition-colors hover:bg-[#e6e9dc] hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleZoomOut} title="Zoom Out" aria-label="Zoom out"><ZoomOut size={15} /></button>
           <span className="min-w-10 text-center font-mono text-[11px] text-[#666e60]">{Math.round(zoom * 100)}%</span>
-          <button className="flex size-8 items-center justify-center rounded-md text-[#5e6758] transition-colors hover:bg-[#e6e9dc] hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleZoomIn} title="Zoom In" aria-label="Zoom in"><ZoomIn size={15} /></button>
-          <button className="ml-1 flex size-8 items-center justify-center rounded-md border-l border-[#d8dbce] pl-2 text-[#5e6758] transition-colors hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleResetZoom} title="Reset View" aria-label="Reset view"><RotateCcw size={14} /></button>
+          <button className="flex size-9 items-center justify-center rounded-lg text-[#5e6758] transition-colors hover:bg-[#e6e9dc] hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleZoomIn} title="Zoom In" aria-label="Zoom in"><ZoomIn size={15} /></button>
+          <button className="ml-1 flex size-9 items-center justify-center rounded-lg border-l border-[#d8dbce] pl-2 text-[#5e6758] transition-colors hover:text-[#222820] focus-visible:outline-2 focus-visible:outline-[#8aa34b]" onClick={handleResetZoom} title="Reset View" aria-label="Reset view"><RotateCcw size={14} /></button>
         </div>
         <div className="flex shrink-0 items-center gap-3">
           <HoldButton
@@ -75,7 +75,7 @@ export default function FlowchartViewer({ svgContent, isLoading, onClear, onExpo
           >
             clear 
           </HoldButton>
-          <button className="inline-flex h-8 items-center gap-2 rounded-md bg-[#788d42] px-3 text-xs font-semibold text-white transition-colors hover:bg-[#687b38] focus-visible:outline-2 focus-visible:outline-[#8aa34b] disabled:cursor-not-allowed disabled:opacity-40" onClick={onExport} disabled={!hasSvg} title="Export SVG Diagram">
+          <button className="inline-flex h-9 items-center gap-2 rounded-lg bg-[#788d42] px-3.5 text-xs font-semibold text-white transition-colors hover:bg-[#687b38] focus-visible:outline-2 focus-visible:outline-[#8aa34b] disabled:cursor-not-allowed disabled:opacity-40" onClick={onExport} disabled={!hasSvg} title="Export SVG Diagram">
             <Download size={14} /> <span>Export SVG</span>
           </button>
         </div>

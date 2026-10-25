@@ -84,7 +84,7 @@ function FlowchartApp() {
     <QuickAccessNav activePage="flowchart" />
     <div className="flex h-[calc(100dvh-4rem)] min-h-105 w-full flex-col overflow-hidden">
       <main className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(260px,0.9fr)_minmax(280px,1.1fr)] overflow-hidden lg:grid-cols-[minmax(340px,0.85fr)_minmax(0,1.5fr)] lg:grid-rows-1">
-        <section className="min-h-0 overflow-hidden border-b border-[#2c342d] lg:border-b-0 lg:border-r">
+        <section className="min-h-0 overflow-hidden border-b border-[#2c342d] lg:border-b-0 lg:border-r lg:border-r-[#39443a]">
           <CodeEditor code={code} onChange={setCode} error={error} />
         </section>
         <section className="min-h-0 overflow-hidden">
