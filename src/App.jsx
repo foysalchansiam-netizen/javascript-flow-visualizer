@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Toolbar from './components/Toolbar';
 import CodeEditor from './components/CodeEditor';
 import FlowchartViewer from './components/FlowchartViewer';
 import AlgorithmPage from './components/AlgorithmPage';
@@ -23,12 +22,20 @@ if (age >= 18) {
 console.log("Finished");`;
 
 export default function App() {
-  if (window.location.pathname === '/algorithms') {
+  const [pathname, setPathname] = useState(() => window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setPathname(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  if (pathname === '/algorithms') {
     return <AlgorithmLibraryPage />;
   }
 
   const currentAlgorithm = [...SORTING_ALGORITHMS, ...SEARCHING_ALGORITHMS].find(
-    ({ slug }) => window.location.pathname === `/algorithms/${slug}`,
+    ({ slug }) => pathname === `/algorithms/${slug}`,
   );
 
   if (currentAlgorithm) {
@@ -37,7 +44,6 @@ export default function App() {
 
   return <FlowchartApp />;
 }
-
 function FlowchartApp() {
   const [code, setCode] = useState(INITIAL_CODE);
   const [svgContent, setSvgContent] = useState(null);
@@ -76,19 +82,19 @@ function FlowchartApp() {
   return (
   <div className="flex min-h-dvh w-full flex-col bg-[#111512] text-[#edf1e8]">
     <QuickAccessNav activePage="flowchart" />
-    <div className="flex h-[calc(100dvh-3.5rem)] min-h-105 w-full flex-col overflow-hidden">
-      <Toolbar 
-        onClear={handleClear}
-        onExport={handleExport}
-        hasSvg={!!svgContent}
-      />
-
+    <div className="flex h-[calc(100dvh-4rem)] min-h-105 w-full flex-col overflow-hidden">
       <main className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(260px,0.9fr)_minmax(280px,1.1fr)] overflow-hidden lg:grid-cols-[minmax(340px,0.85fr)_minmax(0,1.5fr)] lg:grid-rows-1">
         <section className="min-h-0 overflow-hidden border-b border-[#2c342d] lg:border-b-0 lg:border-r">
           <CodeEditor code={code} onChange={setCode} error={error} />
         </section>
         <section className="min-h-0 overflow-hidden">
-          <FlowchartViewer svgContent={svgContent} isLoading={isLoading} />
+          <FlowchartViewer
+            svgContent={svgContent}
+            isLoading={isLoading}
+            onClear={handleClear}
+            onExport={handleExport}
+            hasSvg={!!svgContent}
+          />
         </section>
       </main>
     </div>

@@ -9,7 +9,7 @@ export default function Toolbar({ onClear, onExport, hasSvg }) {
           <Code2 size={20} />
         </div>
         <div className="min-w-0">
-          <h1 className="truncate text-[15px] font-semibold tracking-[0.01em] text-[#f0f2e9]">JS Flow Visualizer</h1>
+          <h1 className="truncate text-[15px] font-semibold tracking-[0.01em] text-[#f0f2e9]">JavaScript to Flowchart</h1>
           <p className="mt-0.5 hidden text-xs text-[#8e998d] sm:block">Turn JavaScript logic into a clear visual map</p>
         </div>
       </div>

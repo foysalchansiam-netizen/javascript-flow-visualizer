@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import QuickAccessNav from './QuickAccessNav';
 import AlgorithmComplexityChart from './AlgorithmComplexityChart';
 
@@ -31,11 +32,28 @@ function getInstagramEmbedUrl(embedValue) {
 
 export default function AlgorithmPage({ algorithm }) {
   const instagramEmbedUrl = getInstagramEmbedUrl(algorithm.instagramEmbedUrl);
+  const videoFrameRef = useRef(null);
+
+  const centerVideoOnLoad = () => {
+    try {
+      const frameWindow = videoFrameRef.current?.contentWindow;
+      const frameDocument = videoFrameRef.current?.contentDocument;
+      if (frameWindow && frameDocument) {
+        const scrollHeight = Math.max(
+          frameDocument.body?.scrollHeight || 0,
+          frameDocument.documentElement?.scrollHeight || 0,
+        );
+        frameWindow.scrollTo({ top: Math.max(0, (scrollHeight - frameWindow.innerHeight) / 2) });
+      }
+    } catch {
+      // Instagram embeds are cross-origin and may not allow parent scrolling.
+    }
+  };
 
   return (
     <div className="min-h-dvh bg-[#111512] text-[#edf1e8]">
       <QuickAccessNav activePage="algorithms" />
-      <main className="grid min-h-[calc(100dvh-3.5rem)] lg:h-[calc(100dvh-3.5rem)] lg:min-h-0 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+      <main className="grid min-h-[calc(100dvh-4rem)] lg:h-[calc(100dvh-4rem)] lg:min-h-0 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
       <section className="flex min-h-[50dvh] flex-col overflow-y-auto border-b border-[#2c342d] px-6 py-6 sm:px-10 sm:py-8 lg:min-h-0 lg:border-b-0 lg:border-r lg:px-14 lg:py-10">
         <a
           href="/algorithms"
@@ -70,7 +88,9 @@ export default function AlgorithmPage({ algorithm }) {
         <iframe
           title={`${algorithm.name} Instagram video`}
           src={instagramEmbedUrl}
-          className="h-[50dvh] w-full overflow-y-auto rounded-2xl border-0 bg-black lg:h-dvh"
+          ref={videoFrameRef}
+          onLoad={centerVideoOnLoad}
+          className="h-[50dvh] w-full self-center rounded-2xl border-0 bg-black lg:h-[calc(100dvh-4rem)]"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           allowFullScreen
           loading="lazy"

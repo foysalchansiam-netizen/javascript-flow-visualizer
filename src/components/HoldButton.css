@@ -1,0 +1,113 @@
+.hold-button {
+  --hold-progress: 0;
+  position: relative;
+  display: inline-grid;
+  height: 2rem;
+  min-width: 5.5rem;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #cdd2c3;
+  border-radius: 0.375rem;
+  background: var(--hold-bg);
+  color: var(--hold-text);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.hold-button:hover:not(:disabled) {
+  border-color: #aeb7a0;
+  box-shadow: 0 0 0 3px rgb(120 141 66 / 0.12);
+}
+
+.hold-button:focus-visible {
+  outline: 2px solid #8aa34b;
+  outline-offset: 2px;
+}
+
+.hold-button[data-phase='holding'] {
+  transform: scale(0.97);
+}
+
+.hold-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.hold-button__label,
+.hold-button__fill {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hold-button__label {
+  position: relative;
+  z-index: 2;
+}
+
+.hold-button__label > span {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  transition: opacity 180ms ease, filter 180ms ease;
+}
+
+.hold-button__done {
+  opacity: 0;
+  filter: blur(2px);
+}
+
+.hold-button[data-phase='done'] .hold-button__idle {
+  opacity: 0;
+  filter: blur(2px);
+}
+
+.hold-button[data-phase='done'] .hold-button__done {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.hold-button__fill {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  width: calc(var(--hold-progress) * 100%);
+  background: var(--hold-fill);
+  color: var(--hold-fill-text);
+  pointer-events: none;
+  transition: width 80ms linear;
+}
+
+.hold-button__fill .hold-button__label {
+  display: none;
+}
+
+.hold-button__label--fill {
+  position: absolute;
+  left: 0;
+  width: 5.5rem;
+  color: var(--hold-fill-text);
+}
+
+.hold-button__fill .hold-button__done {
+  color: var(--hold-fill-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hold-button,
+  .hold-button__label > span,
+  .hold-button__fill {
+    transition: none;
+  }
+}
