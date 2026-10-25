@@ -192,3 +192,35 @@ button {
   animation-duration: 420ms;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+.fun-link {
+  transition: transform 180ms cubic-bezier(0.22, 1.25, 0.36, 1), background-color 180ms ease, border-color 180ms ease;
+}
+
+.fun-link:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.fun-link:active {
+  transform: translateY(2px) scale(0.97);
+}
+
+.algorithm-card {
+  transition: transform 200ms cubic-bezier(0.22, 1.25, 0.36, 1), border-color 180ms ease, background-color 180ms ease;
+}
+
+.algorithm-card:hover {
+  transform: translateY(-4px) rotate(0.5deg);
+}
+
+button:not(.hold-button) {
+  transition: transform 160ms cubic-bezier(0.22, 1.25, 0.36, 1), background-color 160ms ease, color 160ms ease;
+}
+
+button:not(.hold-button):hover:not(:disabled) {
+  transform: translateY(-1px) rotate(-1deg);
+}
+
+button:not(.hold-button):active:not(:disabled) {
+  transform: translateY(1px) scale(0.95);
+}

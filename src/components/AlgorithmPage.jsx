@@ -57,7 +57,7 @@ export default function AlgorithmPage({ algorithm }) {
       <section className="flex min-h-[50dvh] flex-col overflow-y-auto border-b border-[#2c342d] px-6 py-6 sm:px-10 sm:py-8 lg:min-h-0 lg:border-b-0 lg:border-r lg:px-14 lg:py-10">
         <a
           href="/algorithms"
-          className="inline-flex w-fit items-center gap-2 rounded-xl border border-[#39443a] px-5 py-3 font-semibold text-[#cbd5c8] transition hover:border-[#8fbe78] hover:bg-[#1c251d] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a6d58e]"
+          className="fun-link inline-flex w-fit items-center gap-2 rounded-xl border border-[#39443a] px-5 py-3 font-semibold text-[#cbd5c8] transition hover:border-[#8fbe78] hover:bg-[#1c251d] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a6d58e]"
         >
           <span aria-hidden="true">&larr;</span>
           All algorithms

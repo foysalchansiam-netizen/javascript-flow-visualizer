@@ -12,7 +12,7 @@ function AlgorithmCards({ algorithms, label }) {
         <a
           key={slug}
           href={`/algorithms/${slug}`}
-          className="group flex min-h-28 items-center justify-between gap-4 rounded-2xl border border-[#354137] bg-[#1b211c] px-6 py-5 text-left shadow-lg shadow-black/10 transition duration-200 hover:-translate-y-1 hover:border-[#8fbe78] hover:bg-[#222c23] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a6d58e]"
+          className="algorithm-card group flex min-h-28 items-center justify-between gap-4 rounded-2xl border border-[#354137] bg-[#1b211c] px-6 py-5 text-left shadow-lg shadow-black/10 transition duration-200 hover:-translate-y-1 hover:border-[#8fbe78] hover:bg-[#222c23] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a6d58e]"
         >
           <span className="flex items-center gap-4">
             <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#29352a] text-sm font-bold text-[#a6d58e] transition group-hover:bg-[#a6d58e] group-hover:text-[#111512]">
