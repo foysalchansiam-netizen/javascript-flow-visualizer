@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import QuickAccessNav from './QuickAccessNav';
 import AlgorithmComplexityChart from './AlgorithmComplexityChart';
+import AlgorithmQuiz from './AlgorithmQuiz';
 
 function getInstagramEmbedUrl(embedValue) {
   if (!embedValue) {
@@ -81,6 +82,7 @@ export default function AlgorithmPage({ algorithm }) {
             </div>
           )}
           <AlgorithmComplexityChart algorithm={algorithm} />
+          <AlgorithmQuiz algorithm={algorithm} />
         </article>
       </section>
 
