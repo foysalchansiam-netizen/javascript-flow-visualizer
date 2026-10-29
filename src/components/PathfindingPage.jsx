@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, Flag, Play, RotateCcw, Sparkles } from 'lucide-react';
+import { ArrowLeft, Play, RotateCcw } from 'lucide-react';
 import QuickAccessNav from './QuickAccessNav';
 
 const NODES = [
@@ -130,7 +130,7 @@ export default function PathfindingPage({ algorithm }) {
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-white sm:text-5xl">{algorithm.name}</h1>
           <p className="mt-5 text-lg leading-relaxed text-[#b4beb2]">{algorithm.description}</p>
           <div className="mt-7 rounded-2xl border border-[#354137] bg-[#1b211c] p-5 sm:p-6">
-            <div className="flex items-center gap-2 text-[#d1f36a]"><Sparkles size={18} /><h2 className="font-bold">How it works, step by step</h2></div>
+            <div className="flex items-center gap-2 text-[#d1f36a]"><h2 className="font-bold">How it works, step by step</h2></div>
             <ol className="mt-4 space-y-3 text-sm leading-6 text-[#c7d1c4]">{(mode === 'astar' ? [
               'Start at the chosen node with a route cost of zero.',
               'Give every possible next node a score: the route cost so far plus an estimate of the distance to the goal.',
@@ -149,12 +149,11 @@ export default function PathfindingPage({ algorithm }) {
         </section>
 
         <section className="overflow-hidden rounded-2xl border border-[#354137] bg-[#1b211c] shadow-xl shadow-black/10">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2c342d] px-5 py-4"><div><h2 className="font-bold text-white">Explore the graph</h2><p className="mt-1 text-xs text-[#899688]">{hoveredNode ? `Node ${hoveredNode}: click to make it your destination` : visited.length ? `${visited.length} place${visited.length === 1 ? '' : 's'} explored` : 'Click a node or press find the path to begin'}</p></div><div className="flex items-center gap-3 text-xs text-[#9eaa9b]"><span><i className="mr-1 inline-block size-2 rounded-full bg-[#d1f36a]" />Start</span><span><i className="mr-1 inline-block size-2 rounded-full bg-[#f0a673]" />Goal</span></div></div>
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#2c342d] px-5 py-4"><div><h2 className="font-bold text-white">Explore the graph</h2><p className="mt-1 text-xs text-[#899688]">{hoveredNode ? `Node ${hoveredNode}: click to make it your destination` : visited.length ? `${visited.length} place${visited.length === 1 ? '' : 's'} explored` : 'Click a node or press find the path to begin'}</p></div></div>
           <div className="diagram-grid overflow-x-auto bg-[#e4e8dc] p-3 sm:p-6"><svg key={runNumber} viewBox="0 0 820 500" className="mx-auto min-w-[700px]" role="img" aria-label={`${algorithm.name} graph visualization from ${start} to ${goal}`}>
             {EDGES.map(([from, to, weight]) => { const edgeKey = [from, to].sort().join('-'); const a = nodeById[from]; const b = nodeById[to]; const labelX = (a.x + b.x) / 2 + (edgeKey === 'F-K' ? 24 : 0); const labelY = (a.y + b.y) / 2 + (edgeKey === 'F-K' ? 24 : 0); return <g key={edgeKey}><line x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={pathEdges.has(edgeKey) ? '#6f9d42' : '#85927e'} strokeWidth={pathEdges.has(edgeKey) ? 7 : 3} strokeLinecap="round" /><rect x={labelX - 13} y={labelY - 11} width="26" height="22" rx="8" fill="#f4f6ed" /><text x={labelX} y={labelY + 4} textAnchor="middle" fontSize="12" fontWeight="700" fill="#30412e">{weight}</text></g>; })}
             {NODES.map(node => { const isStart = node.id === start; const isGoal = node.id === goal; const isVisited = visitedSet.has(node.id); const isHovered = node.id === hoveredNode; return <g key={node.id} className="cursor-pointer" onClick={() => selectGraphDestination(node.id)} onMouseEnter={() => setHoveredNode(node.id)} onMouseLeave={() => setHoveredNode(null)}><title>{isStart ? 'Starting node' : isGoal ? 'Goal node — click another node to change it' : `Node ${node.id} — click to make it the goal`}</title><circle cx={node.x} cy={node.y} r={isHovered ? 34 : 28} fill={isStart ? '#d1f36a' : isGoal ? '#f0a673' : isVisited ? '#a6d58e' : '#f6f8ef'} stroke={isHovered ? '#243b24' : isVisited || isStart || isGoal ? '#38522f' : '#788674'} strokeWidth={isHovered ? 5 : 3} /><text x={node.x} y={node.y + 6} textAnchor="middle" fontSize="18" fontWeight="800" fill="#1c281c">{node.id}</text>{isStart && <text x={node.x} y={node.y - 39} textAnchor="middle" fontSize="11" fontWeight="700" fill="#38522f">START</text>}{isGoal && <text x={node.x} y={node.y - 39} textAnchor="middle" fontSize="11" fontWeight="700" fill="#864a29">GOAL</text>}</g>; })}
           </svg></div>
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#2c342d] px-5 py-4 text-sm"><p className="text-[#b4beb2]">{path.length ? <>Shortest path: <strong className="text-[#d1f36a]">{path.join(' → ')}</strong> · cost {result.distance}</> : 'The highlighted nodes show the order being explored.'}</p><span className="flex items-center gap-1 text-[#9eaa9b]"><Flag size={14} /> Weighted graph</span></div>
         </section>
       </div>
     </main>
