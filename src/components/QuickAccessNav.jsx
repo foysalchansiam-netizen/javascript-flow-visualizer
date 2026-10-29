@@ -15,7 +15,9 @@ function navigateTo(event, href) {
 }
 
 export default function QuickAccessNav({ activePage }) {
-  const activeClass = activePage === 'algorithms' ? 'is-algorithms' : 'is-flowchart';
+  const activeClass = activePage === 'algorithms'
+    ? 'is-algorithms'
+    : activePage === 'sql' ? 'is-sql' : 'is-flowchart';
 
   return (
     <header className="site-header flex h-16 shrink-0 items-center justify-between border-b border-[#2c342d] bg-[#171c18] px-5 sm:px-7">
@@ -32,6 +34,9 @@ export default function QuickAccessNav({ activePage }) {
         </a>
         <a href="/algorithms" onClick={event => navigateTo(event, '/algorithms')} aria-current={activePage === 'algorithms' ? 'page' : undefined} className="glass-nav__link">
           Algorithms
+        </a>
+        <a href="/sql" onClick={event => navigateTo(event, '/sql')} aria-current={activePage === 'sql' ? 'page' : undefined} className="glass-nav__link">
+          SQL Lab
         </a>
       </nav>
     </header>

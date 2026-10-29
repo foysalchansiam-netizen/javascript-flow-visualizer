@@ -108,8 +108,8 @@ button {
   view-transition-name: quick-nav;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  min-width: 14.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-width: 19rem;
   padding: 0.3rem;
   overflow: hidden;
   border: 2px solid #2f3b2e;
@@ -123,7 +123,7 @@ button {
   top: 0.3rem;
   bottom: 0.3rem;
   left: 0.3rem;
-  width: calc(50% - 0.3rem);
+  width: calc(33.333% - 0.3rem);
   border: 2px solid #b7ed70;
   border-radius: 0.75rem;
   background: #8fc94c;
@@ -134,6 +134,10 @@ button {
 
 .glass-nav.is-algorithms .glass-nav__highlight {
   transform: translateX(100%);
+}
+
+.glass-nav.is-sql .glass-nav__highlight {
+  transform: translateX(200%);
 }
 
 .glass-nav__link {
@@ -168,7 +172,7 @@ button {
 
 @media (max-width: 480px) {
   .glass-nav {
-    min-width: 13.5rem;
+    min-width: 18rem;
   }
 }
 .brand-link {
@@ -215,6 +219,25 @@ button {
 
 .algorithm-card:active {
   transform: translateY(2px) scale(0.97);
+}
+
+.sql-lesson-card {
+  transition: transform 220ms cubic-bezier(0.22, 1.25, 0.36, 1), border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.sql-lesson-card:hover {
+  transform: translateY(-5px) rotate(0.35deg);
+  border-color: #71905f;
+  background-color: #202a21;
+  box-shadow: 0 14px 28px rgb(0 0 0 / 0.16);
+}
+
+.sql-lesson-action {
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.sql-lesson-action:hover {
+  transform: translateX(2px);
 }
 
 button:not(.hold-button) {
