@@ -3,11 +3,13 @@ import CodeEditor from './components/CodeEditor';
 import FlowchartViewer from './components/FlowchartViewer';
 import AlgorithmPage from './components/AlgorithmPage';
 import AlgorithmLibraryPage from './components/AlgorithmLibraryPage';
+import PathfindingPage from './components/PathfindingPage';
 import SqlPage from './components/SqlPage';
 import SqlLessonPage from './components/SqlLessonPage';
 import QuickAccessNav from './components/QuickAccessNav';
 import SORTING_ALGORITHMS from './data/algorithms';
 import SEARCHING_ALGORITHMS from './data/search-algorithms';
+import PATHFINDING_ALGORITHMS from './data/pathfinding-algorithms';
 import SQL_LESSONS from './data/sqlLessons';
 import { convertCodeToFlowchartSvg } from './utils/convertCode';
 import { exportSvg } from './utils/exportDiagram';
@@ -46,11 +48,14 @@ export default function App() {
     if (lesson) return <SqlLessonPage lesson={lesson} />;
   }
 
-  const currentAlgorithm = [...SORTING_ALGORITHMS, ...SEARCHING_ALGORITHMS].find(
+  const currentAlgorithm = [...SORTING_ALGORITHMS, ...SEARCHING_ALGORITHMS, ...PATHFINDING_ALGORITHMS].find(
     ({ slug }) => pathname === `/algorithms/${slug}`,
   );
 
   if (currentAlgorithm) {
+    if (currentAlgorithm.visualizer === 'pathfinding') {
+      return <PathfindingPage algorithm={currentAlgorithm} />;
+    }
     return <AlgorithmPage algorithm={currentAlgorithm} />;
   }
 

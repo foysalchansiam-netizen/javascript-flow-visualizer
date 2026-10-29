@@ -1,6 +1,7 @@
 import QuickAccessNav from './QuickAccessNav';
 import SORTING_ALGORITHMS from '../data/algorithms';
 import SEARCHING_ALGORITHMS from '../data/search-algorithms';
+import PATHFINDING_ALGORITHMS from '../data/pathfinding-algorithms';
 
 function AlgorithmCards({ algorithms, label }) {
   return (
@@ -61,6 +62,13 @@ export default function AlgorithmLibraryPage() {
             Searching algorithms
           </h2>
           <AlgorithmCards algorithms={SEARCHING_ALGORITHMS} label="Searching" />
+        </section>
+
+        <section className="mt-12 border-t border-[#39443a] pt-10">
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+            Pathfinding algorithms
+          </h2>
+          <AlgorithmCards algorithms={PATHFINDING_ALGORITHMS} label="Pathfinding" />
         </section>
       </main>
     </div>
