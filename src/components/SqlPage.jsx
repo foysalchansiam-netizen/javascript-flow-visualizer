@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import initSqlJs from 'sql.js';
 import wasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
-import { BookOpen, Database, Play, RotateCcw, Table2 } from 'lucide-react';
+import { BookOpen, Play, RotateCcw, Table2 } from 'lucide-react';
 import QuickAccessNav from './QuickAccessNav';
 import SQL_LESSONS from '../data/sqlLessons';
 const STARTER_SQL = `-- Try a query, then edit the data and run it again
@@ -79,9 +79,6 @@ export default function SqlPage() {
             <h1 className="mt-2 text-3xl font-bold text-white sm:text-4xl">SQL Lab</h1>
             <p className="mt-3 max-w-2xl leading-relaxed text-[#b4beb2]">Write and execute real SQLite queries locally in WebAssembly. Your data stays in this page.</p>
           </div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#3d553e] bg-[#1b291d] px-3 py-2 text-xs font-semibold text-[#bce596]">
-            <Database size={14} /> {ready ? 'SQLite ready' : 'Loading SQLite…'}
-          </span>
         </div>
 
         <section className="mt-8 overflow-hidden rounded-2xl border border-[#354137] bg-[#1b211c] shadow-xl shadow-black/10">
@@ -103,7 +100,7 @@ export default function SqlPage() {
           <div className="flex items-center gap-3"><BookOpen className="text-[#a6d58e]" /><h2 className="text-2xl font-bold text-white">SQL learning cards</h2></div>
           <p className="mt-2 text-[#b4beb2]">Choose a concept to read a short explanation and see a practical query.</p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{SQL_LESSONS.map((lesson, index) => <article key={lesson.slug} className="sql-lesson-card group rounded-2xl border border-[#354137] bg-[#1b211c] p-5">
-            <div className="flex items-start justify-between gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-[#29352a] text-xs font-bold text-[#a6d58e] transition-colors group-hover:bg-[#d1f36a] group-hover:text-[#17200f]">{String(index + 1).padStart(2, '0')}</span><span className="rounded-full border border-[#3d553e] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#82927e]">Mini lesson</span></div>
+            <div className="flex items-start gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-[#29352a] text-xs font-bold text-[#a6d58e] transition-colors group-hover:bg-[#d1f36a] group-hover:text-[#17200f]">{String(index + 1).padStart(2, '0')}</span></div>
             <h3 className="mt-5 font-mono text-lg font-bold text-[#d1f36a]">{lesson.title}</h3><p className="mt-2 min-h-12 text-sm leading-relaxed text-[#b4beb2]">{lesson.description}</p>
             <div className="mt-4 rounded-lg bg-[#121813] p-3"><p className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#778477]">A query to explore</p><code className="block font-mono text-xs leading-relaxed text-[#d9e2d6]">{lesson.example}</code></div>
             <div className="mt-5 flex items-center gap-4 text-xs font-bold"><a href={`/sql/lessons/${lesson.slug}`} className="sql-lesson-action text-[#a6d58e] hover:text-white">Explain it <span aria-hidden="true">→</span></a><a href={`/sql?query=${encodeURIComponent(lesson.example)}`} className="sql-lesson-action text-[#c2c9bc] hover:text-white">Try it <span aria-hidden="true">↗</span></a></div>
