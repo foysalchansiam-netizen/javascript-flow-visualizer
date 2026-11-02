@@ -10,7 +10,7 @@ export default function UiverseActionButton({ children, href, onClick, disabled 
       disabled={href ? undefined : disabled}
       title={title}
     >
-      <span className="absolute h-0 w-0 rounded-full bg-[#718f43] transition-all duration-500 ease-out group-hover:h-56 group-hover:w-56" />
+      <span className="absolute left-1/2 top-1/2 h-0 w-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#718f43] transition-all duration-[1200ms] ease-in-out group-hover:h-[28rem] group-hover:w-[28rem]" />
       <span className="absolute bottom-0 left-0 -ml-2 h-full">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-auto object-stretch opacity-100" viewBox="0 0 487 487" aria-hidden="true">
           <path fillOpacity=".1" fillRule="nonzero" fill="#FFF" d="M0 .3c67 2.1 134.1 4.3 186.3 37 52.2 32.7 89.6 95.8 112.8 150.6 23.2 54.8 32.3 101.4 61.2 149.9 28.9 48.4 77.7 98.8 126.4 149.2H0V.3z" />
