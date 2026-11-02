@@ -7,6 +7,7 @@ import PathfindingPage from './components/PathfindingPage';
 import SqlPage from './components/SqlPage';
 import SqlLessonPage from './components/SqlLessonPage';
 import QuickAccessNav from './components/QuickAccessNav';
+import SiteFooter from './components/SiteFooter';
 import SORTING_ALGORITHMS from './data/algorithms';
 import SEARCHING_ALGORITHMS from './data/search-algorithms';
 import PATHFINDING_ALGORITHMS from './data/pathfinding-algorithms';
@@ -115,6 +116,7 @@ function FlowchartApp() {
         </section>
       </main>
     </div>
+    <SiteFooter />
 
   </div>
 );

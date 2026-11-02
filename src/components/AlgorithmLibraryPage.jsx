@@ -3,6 +3,7 @@ import SORTING_ALGORITHMS from '../data/algorithms';
 import SEARCHING_ALGORITHMS from '../data/search-algorithms';
 import PATHFINDING_ALGORITHMS from '../data/pathfinding-algorithms';
 import UiverseActionButton from './UiverseActionButton';
+import SiteFooter from './SiteFooter';
 
 function AlgorithmCards({ algorithms, label }) {
   return (
@@ -65,6 +66,7 @@ export default function AlgorithmLibraryPage() {
           <AlgorithmCards algorithms={PATHFINDING_ALGORITHMS} label="Pathfinding" />
         </section>
       </main>
+      <SiteFooter />
     </div>
   );
 }

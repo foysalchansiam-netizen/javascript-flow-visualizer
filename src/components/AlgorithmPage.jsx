@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import QuickAccessNav from './QuickAccessNav';
 import AlgorithmComplexityChart from './AlgorithmComplexityChart';
 import AlgorithmQuiz from './AlgorithmQuiz';
+import SiteFooter from './SiteFooter';
 
 function getInstagramEmbedUrl(embedValue) {
   if (!embedValue) {
@@ -113,6 +114,7 @@ export default function AlgorithmPage({ algorithm }) {
         </div>
       )}
       </main>
+      <SiteFooter />
     </div>
   );
 }

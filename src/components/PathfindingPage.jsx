@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, Play, RotateCcw } from 'lucide-react';
 import QuickAccessNav from './QuickAccessNav';
+import SiteFooter from './SiteFooter';
 
 const NODES = [
   { id: 'A', x: 70, y: 200 }, { id: 'B', x: 190, y: 70 }, { id: 'C', x: 190, y: 330 },
@@ -156,6 +157,7 @@ export default function PathfindingPage({ algorithm }) {
           </svg></div>
         </section>
       </div>
-    </main>
+  </main>
+  <SiteFooter />
   </div>;
 }

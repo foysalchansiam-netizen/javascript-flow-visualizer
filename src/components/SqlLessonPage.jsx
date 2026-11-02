@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, BookOpen, Play } from 'lucide-react';
 import QuickAccessNav from './QuickAccessNav';
+import SiteFooter from './SiteFooter';
 
 function goToSql(event) {
   event.preventDefault();
@@ -25,6 +26,7 @@ export default function SqlLessonPage({ lesson }) {
           <a href={`/sql?query=${encodeURIComponent(lesson.example)}`} className="mt-7 inline-flex items-center gap-2 rounded-md bg-[#d1f36a] px-4 py-2.5 text-sm font-bold text-[#1b2414] hover:bg-[#defb80]"><Play size={15} fill="currentColor" /> Try this query</a>
         </section>
       </main>
+      <SiteFooter />
     </div>
   );
 }

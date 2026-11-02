@@ -4,6 +4,7 @@ import wasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
 import { BookOpen, Play, RotateCcw, Table2 } from 'lucide-react';
 import QuickAccessNav from './QuickAccessNav';
 import ExpandingActionButton from './ExpandingActionButton';
+import SiteFooter from './SiteFooter';
 import SQL_LESSONS from '../data/sqlLessons';
 const STARTER_SQL = `-- Try a query, then edit the data and run it again
 SELECT name, department, salary
@@ -110,6 +111,7 @@ export default function SqlPage() {
             */}</article>)}</div>
         </section>
       </main>
+      <SiteFooter />
     </div>
   );
 }
