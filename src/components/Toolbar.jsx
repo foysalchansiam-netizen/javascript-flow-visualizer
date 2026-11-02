@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trash2, Download, Code2 } from 'lucide-react';
+import ExpandingActionButton from './ExpandingActionButton';
 
 export default function Toolbar({ onClear, onExport, hasSvg }) {
   return (
@@ -19,14 +20,14 @@ export default function Toolbar({ onClear, onExport, hasSvg }) {
           <Trash2 size={15} /> <span>Clear</span>
         </button>
 
-        <button 
-          className="inline-flex h-9 items-center gap-2 rounded-md bg-[#d1f36a] px-3.5 text-xs font-semibold text-[#1b2414] transition-colors hover:bg-[#defb80] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d1f36a] disabled:cursor-not-allowed disabled:opacity-40" 
+        <ExpandingActionButton
+          icon={<Download size={15} />}
           onClick={onExport} 
           disabled={!hasSvg}
           title="Export SVG Diagram"
         >
-          <Download size={15} /> <span>Export SVG</span>
-        </button>
+          Export SVG
+        </ExpandingActionButton>
       </div>
     </header>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ZoomIn, ZoomOut, RotateCcw, Trash2, Download, Check } from 'lucide-react';
 import HoldButton from './HoldButton';
+import ExpandingActionButton from './ExpandingActionButton';
 import './HoldButton.css';
 
 export default function FlowchartViewer({ svgContent, isLoading, onClear, onExport, hasSvg }) {
@@ -75,9 +76,9 @@ export default function FlowchartViewer({ svgContent, isLoading, onClear, onExpo
           >
             clear 
           </HoldButton>
-          <button className="inline-flex h-9 items-center gap-2 rounded-lg bg-[#788d42] px-3.5 text-xs font-semibold text-white transition-colors hover:bg-[#687b38] focus-visible:outline-2 focus-visible:outline-[#8aa34b] disabled:cursor-not-allowed disabled:opacity-40" onClick={onExport} disabled={!hasSvg} title="Export SVG Diagram">
-            <Download size={14} /> <span>Export SVG</span>
-          </button>
+          <ExpandingActionButton icon={<Download size={14} />} onClick={onExport} disabled={!hasSvg} title="Export SVG Diagram">
+            Export SVG
+          </ExpandingActionButton>
         </div>
       </div>
 

@@ -240,6 +240,78 @@ button {
   transform: translateX(2px);
 }
 
+.sql-explain-button {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  padding: 0.4rem 0.55rem 0.4rem 0.85rem;
+  border: 2px solid #f4f7ef;
+  border-radius: 9999px;
+  background: #f4f7ef;
+  box-shadow: 0 4px 0 #0b0f0c;
+  color: #17200f;
+  transition: color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.sql-explain-button::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: -100%;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background: #8fc94c;
+  content: '';
+  transform: translateY(-50%);
+  transition: left 700ms ease, transform 700ms ease;
+}
+
+.sql-explain-button:hover,
+.sql-explain-button:focus-visible {
+  color: #f4f7ef;
+  transform: translateY(-2px);
+}
+
+.sql-explain-button:hover::before,
+.sql-explain-button:focus-visible::before {
+  left: 0;
+  transform: translateY(-50%) scale(1.5);
+}
+
+.sql-explain-button:active {
+  box-shadow: 0 1px 0 #0b0f0c;
+  transform: translateY(2px) scale(0.97);
+}
+
+.sql-explain-label,
+.sql-explain-icon {
+  position: relative;
+  z-index: 1;
+}
+
+.sql-explain-icon {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border: 1px solid #39443a;
+  border-radius: 9999px;
+  fill: #17200f;
+  transform: rotate(45deg);
+  transition: transform 300ms ease, background-color 300ms ease, border-color 300ms ease;
+}
+
+.sql-explain-button:hover .sql-explain-icon,
+.sql-explain-button:focus-visible .sql-explain-icon {
+  border-color: transparent;
+  background: #f4f7ef;
+  transform: rotate(90deg);
+}
+
 button:not(.hold-button) {
   transition: transform 160ms cubic-bezier(0.22, 1.25, 0.36, 1), background-color 160ms ease, color 160ms ease;
 }

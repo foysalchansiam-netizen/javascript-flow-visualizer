@@ -3,6 +3,7 @@ import initSqlJs from 'sql.js';
 import wasmUrl from 'sql.js/dist/sql-wasm.wasm?url';
 import { BookOpen, Play, RotateCcw, Table2 } from 'lucide-react';
 import QuickAccessNav from './QuickAccessNav';
+import ExpandingActionButton from './ExpandingActionButton';
 import SQL_LESSONS from '../data/sqlLessons';
 const STARTER_SQL = `-- Try a query, then edit the data and run it again
 SELECT name, department, salary
@@ -86,7 +87,7 @@ export default function SqlPage() {
             <span className="flex items-center gap-2 text-sm font-semibold text-[#dce2d6]"><Table2 size={16} className="text-[#d1f36a]" /> Query editor</span>
             <div className="flex gap-2">
               <button onClick={resetDatabase} className="inline-flex items-center gap-2 rounded-md border border-[#394139] px-3 py-2 text-xs font-semibold text-[#c2c9bc] hover:bg-[#252f26]"><RotateCcw size={14} /> Reset data</button>
-              <button onClick={runQuery} disabled={!ready} className="inline-flex items-center gap-2 rounded-md bg-[#d1f36a] px-4 py-2 text-xs font-bold text-[#1b2414] disabled:opacity-40"><Play size={14} fill="currentColor" /> Run query</button>
+              <ExpandingActionButton theme="dark" icon={<Play size={14} fill="currentColor" />} onClick={runQuery} disabled={!ready} title="Run SQL query">Run SQL</ExpandingActionButton>
             </div>
           </div>
           <textarea value={sql} onChange={event => setSql(event.target.value)} spellCheck={false} className="min-h-52 w-full resize-y bg-[#151b16] p-5 font-mono text-sm leading-7 text-[#d5e89d] outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#718b43]" aria-label="SQL query editor" />
@@ -103,8 +104,10 @@ export default function SqlPage() {
             <div className="flex items-start gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-[#29352a] text-xs font-bold text-[#a6d58e] transition-colors group-hover:bg-[#d1f36a] group-hover:text-[#17200f]">{String(index + 1).padStart(2, '0')}</span></div>
             <h3 className="mt-5 font-mono text-lg font-bold text-[#d1f36a]">{lesson.title}</h3><p className="mt-2 min-h-12 text-sm leading-relaxed text-[#b4beb2]">{lesson.description}</p>
             <div className="mt-4 rounded-lg bg-[#121813] p-3"><p className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#778477]">A query to explore</p><code className="block font-mono text-xs leading-relaxed text-[#d9e2d6]">{lesson.example}</code></div>
-            <div className="mt-5 flex items-center gap-4 text-xs font-bold"><a href={`/sql/lessons/${lesson.slug}`} className="sql-lesson-action text-[#a6d58e] hover:text-white">Explain it <span aria-hidden="true">→</span></a><a href={`/sql?query=${encodeURIComponent(lesson.example)}`} className="sql-lesson-action text-[#c2c9bc] hover:text-white">Try it <span aria-hidden="true">↗</span></a></div>
-          </article>)}</div>
+            <div className="mt-5 flex items-center gap-4 text-xs font-bold"><a href={`/sql/lessons/${lesson.slug}`} className="sql-lesson-action sql-explain-button" aria-label={`Explain ${lesson.title}`}><span className="sql-explain-label">Explain it</span><svg className="sql-explain-icon" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z" /></svg></a><a href={`/sql?query=${encodeURIComponent(lesson.example)}`} className="sql-lesson-action sql-try-action text-[#c2c9bc] hover:text-white">Try it <span aria-hidden="true">↗</span></a></div>
+            {/*
+            <div className="mt-5 flex items-center gap-4 text-xs font-bold"><a href={`/sql/lessons/${lesson.slug}`} className="sql-lesson-action sql-explain-button" aria-label={`Explain ${lesson.title}`}><span className="sql-explain-label">Explain it</span><svg className="sql-explain-icon" viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 6.??? 7.07107 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z" /></svg></a><a href={`/sql?query=${encodeURIComponent(lesson.example)}`} className="sql-lesson-action sql-try-action text-[#c2c9bc] hover:text-white">Try it <span aria-hidden="true">↗</span></a></div>
+            */}</article>)}</div>
         </section>
       </main>
     </div>
